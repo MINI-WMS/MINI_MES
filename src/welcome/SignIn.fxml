@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="380.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="welcome.SignInController">
+    <top>
+        <ImageView fitHeight="130.0" fitWidth="500.0" BorderPane.alignment="TOP_CENTER">
+            <image>
+                <Image url="@welcome.jpg" />
+            </image>
+        </ImageView>
+    </top>
+    <center>
+        <VBox prefWidth="500.0" BorderPane.alignment="CENTER">
+            <children>
+                <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="500.0">
+                </HBox>
+                <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="500.0">
+                    <children>
+                        <Label alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="90.0" text="用户名：" textAlignment="RIGHT" />
+                        <TextField fx:id="tfUserCode" prefHeight="30.0" prefWidth="270" />
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="500.0">
+                    <children>
+                        <Label alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="90.0" text="密码：" textAlignment="RIGHT" />
+                        <TextField fx:id="tfPwd" prefHeight="30.0" prefWidth="270" />
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="500.0">
+                    <children>
+                        <Label alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="90.0" text="工作日期：" textAlignment="RIGHT" />
+                  <DatePicker fx:id="dpWorkDate" prefHeight="30.0" prefWidth="270" />
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="500.0">
+                    <children>
+                        <Label alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="90.0" text="班次：" textAlignment="RIGHT" />
+                  <ComboBox fx:id="com" prefHeight="30.0" prefWidth="270" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="20.0" prefWidth="500.0">
+
+                </HBox>
+                <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="500.0" spacing="30.0">
+                    <children>
+                  <Button disable="true" prefHeight="30.0" prefWidth="150.0" text="修改密码" />
+                       <Button onAction="#SignInAction" prefHeight="30.0" prefWidth="150.0" text="登录" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>
