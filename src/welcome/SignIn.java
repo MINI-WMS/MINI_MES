@@ -8,8 +8,6 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import main.status;
 
-import java.util.Locale;
-
 /**
  * 登录界面
  */
@@ -21,26 +19,17 @@ public class SignIn extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		//显示登录界面
+		status.signInStage = primaryStage;
 		Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
 
 		Scene scene = new Scene(root);
-
 		primaryStage.setScene(scene);
-
-		// 设置窗体标题
-		primaryStage.setTitle("MINI MES");
-
-		// 设置窗体图标
-		primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("logo.png")));
-
+		primaryStage.setTitle("MINI MES");// 设置窗体标题
+		primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("logo.png")));// 设置窗体图标
 		primaryStage.setResizable(false);
+		primaryStage.centerOnScreen();// 设置到屏幕中心
 
-		// 设置到屏幕中心
-		primaryStage.centerOnScreen();
-
-		// 显示窗体
-		primaryStage.show();
-
-		status.signInStage = primaryStage;
+		primaryStage.show();// 显示窗体
 	}
 }

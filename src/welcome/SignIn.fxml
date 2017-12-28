@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,7 +16,7 @@
     <top>
         <ImageView fitHeight="130.0" fitWidth="500.0" BorderPane.alignment="TOP_CENTER">
             <image>
-                <Image url="@welcome.jpg" />
+                <Image url="@../img/welcome.jpg" />
             </image>
         </ImageView>
     </top>
@@ -27,25 +28,25 @@
                 <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="500.0">
                     <children>
                         <Label alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="90.0" text="用户名：" textAlignment="RIGHT" />
-                        <TextField fx:id="tfUserCode" prefHeight="30.0" prefWidth="270" />
+                        <TextField fx:id="tfUserCode" prefHeight="30.0" prefWidth="300" promptText="请输入您的用户名" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="500.0">
                     <children>
                         <Label alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="90.0" text="密码：" textAlignment="RIGHT" />
-                        <TextField fx:id="tfPwd" prefHeight="30.0" prefWidth="270" />
+                        <PasswordField fx:id="tfPwd" prefHeight="30.0" prefWidth="300" promptText="请输入您的密码" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="500.0">
                     <children>
                         <Label alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="90.0" text="工作日期：" textAlignment="RIGHT" />
-                  <DatePicker fx:id="dpWorkDate" prefHeight="30.0" prefWidth="270" />
+                  <DatePicker fx:id="dpWorkDate" editable="false" pickOnBounds="false" prefHeight="30.0" prefWidth="300" promptText="请选择工作日期" showWeekNumbers="true" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="500.0">
                     <children>
                         <Label alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="90.0" text="班次：" textAlignment="RIGHT" />
-                  <ComboBox fx:id="com" prefHeight="30.0" prefWidth="270" />
+                  <ComboBox fx:id="cbShift" prefHeight="30.0" prefWidth="300" promptText="请选择班次" />
                     </children>
                 </HBox>
                 <HBox prefHeight="20.0" prefWidth="500.0">
@@ -54,7 +55,7 @@
                 <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="500.0" spacing="30.0">
                     <children>
                   <Button disable="true" prefHeight="30.0" prefWidth="150.0" text="修改密码" />
-                       <Button onAction="#SignInAction" prefHeight="30.0" prefWidth="150.0" text="登录" />
+                       <Button fx:id="btnSignIn" onAction="#SignInAction" prefHeight="30.0" prefWidth="150.0" text="登录" />
                     </children>
                 </HBox>
             </children>

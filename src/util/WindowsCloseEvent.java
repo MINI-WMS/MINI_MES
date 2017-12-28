@@ -1,4 +1,4 @@
-package utils;
+package util;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
@@ -24,9 +24,9 @@ public class WindowsCloseEvent implements EventHandler<WindowEvent> {
 		event.consume();
 
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-		alert.setTitle("确认关闭？");
-		alert.setHeaderText("系统正在运行！");
-		alert.setContentText("退出可能造成数据丢失...");
+		alert.setTitle("退出系统");
+		alert.setHeaderText("确认退出系统？");
+		alert.setContentText("退出系统，结束本次工作？\n");
 
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK){
