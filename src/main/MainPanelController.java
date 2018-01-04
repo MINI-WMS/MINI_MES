@@ -2,26 +2,22 @@ package main;
 
 import com.alibaba.fastjson.JSONArray;
 import com.ltsznh.model.R;
+import com.ltsznh.param.PARAM;
 import com.ltsznh.util.syncData;
 import entity.SysMenuEntity;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -55,28 +51,6 @@ public class MainPanelController implements Initializable {
 
 	@FXML
 	private TabPane content;
-
-	@FXML
-	private void webTest(ActionEvent event) {
-		WebEngine webEngine = webTest.getEngine();
-
-		webEngine.load(status.getBaseUrl());
-//		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
-//			@Override
-//			public void changed(ObservableValue<? extends Worker.State> observable, Worker.State oldValue, Worker.State newValue) {
-//				if (newValue == Worker.State.SUCCEEDED) {
-//					System.out.println("load !!!");
-//
-//					URI uri = URI.create("http://127.0.0.1:8080");
-//
-//					CookieManager manager = new CookieManager();
-//					for (HttpCookie httpCookie : manager.getCookieStore().get(uri)) {
-//						System.out.println("test> " + " # " + httpCookie.toString() + " - " + httpCookie.getSecure());
-//					}
-//				}
-//			}
-//		});
-	}
 
 	/**
 	 * 全屏当前选项卡内容
@@ -121,7 +95,7 @@ public class MainPanelController implements Initializable {
 
 		// 后台读取菜单列表
 //		new Thread(() -> {
-		R menuList = syncData.sendGetRequest(status.getBaseUrl() + "/sys/menu/nav", new HashMap<>());
+		R menuList = syncData.sendGetRequest(PARAM.getBaseUrl() + "/sys/menu/nav", new HashMap<>());
 		if (menuList == null || menuList.getCode() != 0) {
 			// 获取菜单错误
 
@@ -177,7 +151,7 @@ public class MainPanelController implements Initializable {
 
 								// 加载页面
 								WebEngine webEngine = ((WebView) node).getEngine();
-								webEngine.load(status.getBaseUrl() + "/" + clickMenu.getUrl());
+								webEngine.load(PARAM.getBaseUrl() + "/" + clickMenu.getUrl());
 							} else if (menu2.getUrl().endsWith(".fxml")) {// 客户端权限
 								try {
 									node = (Node) FXMLLoader.load(getClass().getResource(clickMenu.getUrl()));

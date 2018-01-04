@@ -1,10 +1,9 @@
 package main;
 
-import com.ltsznh.util.Const;
+import com.ltsznh.param.Const;
 import entity.Shift;
 import entity.SysUserEntity;
 import javafx.event.EventHandler;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.SingleSelectionModel;
@@ -54,39 +53,7 @@ public class status {
 	public static HashMap tabs = new HashMap();
 
 
-	// 与WEB端交互变量
-	private static String BASE_URL = "http://localhost:8080";// WEB端SESSION值
-	//	private static String COOKIES = null;// WEB端SESSION值
-	private static String COOKIES = "JSESSIONID=dd1347c3-e71d-4646-97fa-4461cf8eb129;rememberMe=deleteMe;";// WEB端SESSION值
 
-	public static String getBaseUrl() {
-		return BASE_URL;
-	}
-
-	public static String getCOOKIES() {
-		return COOKIES;
-	}
-
-
-	/**
-	 * 设置Cookies
-	 *
-	 * @param COOKIES
-	 */
-	public static void setCOOKIES(String COOKIES) {
-		if (COOKIES != null) status.COOKIES = COOKIES;
-		if (status.COOKIES == null) return;
-		// 设置cookies
-		new WebView();// 初始化一个WebView，否则CookieHandler.getDefault()为null
-		URI uri = URI.create(status.getBaseUrl());
-		Map<String, List<String>> headers = new LinkedHashMap<>();
-		headers.put(Const.KEY_HEADER_COOKIE, Arrays.asList(status.getCOOKIES()));
-		try {
-			CookieHandler.getDefault().put(uri, headers);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 
 	public static void setUser(SysUserEntity user) {
 		if (user == null) {

@@ -11,7 +11,10 @@ buildNumber.properties
 .mvn/timing.properties  
   
 .idea/
-lib/ 
+lib/
+logs/
+log/
+classes/
   
 ## File-based project format:  
 *.iws  

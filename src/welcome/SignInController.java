@@ -2,6 +2,7 @@ package welcome;
 
 import com.alibaba.fastjson.JSON;
 import com.ltsznh.model.R;
+import com.ltsznh.param.PARAM;
 import com.ltsznh.util.Encryption;
 import com.ltsznh.util.syncData;
 import entity.Shift;
@@ -115,7 +116,7 @@ public class SignInController implements Initializable {
 //		params.put("phone", status.getUserCode());
 //		params.put("password", Encryption.encrypt2SHA1(Encryption.encrypt2SHA1(tfPwd.getText())));
 //		R result = syncData.sendPostRequest("http://127.0.0.1:8080/sys/login", params);
-		R result = syncData.sendPostRequest(status.getBaseUrl() + "/sys/login?phone=" + tfUserCode.getText().trim() +
+		R result = syncData.sendPostRequest(PARAM.getBaseUrl() + "/sys/login?phone=" + tfUserCode.getText().trim() +
 				"&password=" + Encryption.encrypt2SHA1(Encryption.encrypt2SHA1(tfPwd.getText())), null);
 
 		// 身份验证失败
@@ -135,12 +136,12 @@ public class SignInController implements Initializable {
 		// 身份验证成功
 		boolean getInfo = true;
 		// 1、设置cookies
-		if (result.containsKey("cookies")) status.setCOOKIES(result.get("cookies").toString());
+		if (result.containsKey("cookies")) PARAM.setCOOKIES(result.get("cookies").toString());
 		else {
 			getInfo = false;
 		}
 		// 2、获取用户名称等信息
-		R userInfo = syncData.sendGetRequest(status.getBaseUrl() + "/sys/user/info", new HashMap<>());
+		R userInfo = syncData.sendGetRequest(PARAM.getBaseUrl() + "/sys/user/info", new HashMap<>());
 		if (userInfo == null || userInfo.getCode() != 0) {
 			getInfo = false;
 		} else {

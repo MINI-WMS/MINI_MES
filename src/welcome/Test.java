@@ -1,5 +1,6 @@
 package welcome;
 
+import com.ltsznh.param.PARAM;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,7 +18,7 @@ public class Test extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws  Exception {
-		status.setCOOKIES(null);
+		PARAM.setCOOKIES(null);
 		//显示登录界面
 		status.mainPanelStage = primaryStage;
 		Parent root = FXMLLoader.load(getClass().getResource("/main/MainPanel.fxml"));
