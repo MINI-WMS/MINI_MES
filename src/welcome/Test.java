@@ -1,4 +1,4 @@
-package test;
+package welcome;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,14 +17,15 @@ public class Test extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws  Exception {
+		status.setCOOKIES(null);
 		//显示登录界面
-		status.signInStage = primaryStage;
-		Parent root = FXMLLoader.load(getClass().getResource("../main/MainPanel.fxml"));
+		status.mainPanelStage = primaryStage;
+		Parent root = FXMLLoader.load(getClass().getResource("/main/MainPanel.fxml"));
 
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("MINI MES");// 设置窗体标题
-		primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("../img/logo.png")));// 设置窗体图标
+		primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo.png")));// 设置窗体图标
 
 		primaryStage.setResizable(true);//不允许重置大小时全屏会盖住任务栏
 		primaryStage.centerOnScreen();// 设置到屏幕中心

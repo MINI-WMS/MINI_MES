@@ -60,7 +60,7 @@ public class syncData {
 			conn.setRequestMethod("GET");
 			conn.setConnectTimeout(TIMEOUT);
 //			conn.setRequestProperty("Content-Type", "text/xml");
-			conn.setRequestProperty("Content-Type", "text/xml");
+			conn.setRequestProperty("Content-Type", "application/json");
 			conn.setRequestProperty("Charset", PARAM.ENCODING);
 			conn.setDoInput(true);
 			conn.setDoOutput(true);
@@ -169,7 +169,7 @@ public class syncData {
 				R result = Convert.inputStreamToR(in, encoding);
 
 				// 如果是Cookies为空，获取Cookies
-				if (status.getCOOKIES() == null) {
+//				if (status.getCOOKIES() == null) {
 					String key, cookieVal, cookies = "";
 					for (int i = 1; (key = conn.getHeaderFieldKey(i)) != null; i++) {
 						if (key.equalsIgnoreCase(Const.KEY_HEADER_COOKIE)) {
@@ -179,7 +179,7 @@ public class syncData {
 						}
 					}
 					result.put("cookies", cookies);
-				}
+//				}
 
 				return result;
 				// in无值时需要处理

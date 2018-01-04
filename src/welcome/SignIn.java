@@ -26,7 +26,7 @@ public class SignIn extends Application {
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("MINI MES");// 设置窗体标题
-		primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("logo.png")));// 设置窗体图标
+		primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo.png")));// 设置窗体图标
 		primaryStage.setResizable(false);
 		primaryStage.centerOnScreen();// 设置到屏幕中心
 

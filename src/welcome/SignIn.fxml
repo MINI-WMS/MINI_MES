@@ -16,7 +16,7 @@
     <top>
         <ImageView fitHeight="130.0" fitWidth="500.0" BorderPane.alignment="TOP_CENTER">
             <image>
-                <Image url="@../img/welcome.jpg" />
+                <Image url="@/img/welcome.jpg" />
             </image>
         </ImageView>
     </top>

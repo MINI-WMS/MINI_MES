@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.ltsznh.model.R;
 import com.ltsznh.util.Encryption;
 import com.ltsznh.util.syncData;
+import entity.Shift;
 import entity.SysUserEntity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,7 +18,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import main.status;
-import entity.Shift;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import util.MiniAlert;
 import util.focus;
 
@@ -28,6 +30,8 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class SignInController implements Initializable {
+
+	private Logger logger = LogManager.getLogger(SignInController.class);
 
 	@FXML
 	private TextField tfUserCode;
@@ -40,9 +44,18 @@ public class SignInController implements Initializable {
 	@FXML
 	private Button btnSignIn;
 
-//	Gson
+	private void setDisable(boolean disable) {
+		tfUserCode.setEditable(!disable);
+		tfPwd.setEditable(!disable);
+		dpWorkDate.setDisable(disable);
+		cbShift.setDisable(disable);
+
+		btnSignIn.setDisable(disable);
+	}
 
 	private void alertInfo(TextField item, String itemString) {
+		logger.warn("信息不完整" + itemString);
+
 		MiniAlert alert = new MiniAlert(Alert.AlertType.INFORMATION, "请输入您的" + itemString);
 		alert.setTitle("登录信息不完整");
 		alert.setHeaderText("请输入" + itemString);
@@ -50,10 +63,13 @@ public class SignInController implements Initializable {
 
 		item.selectAll();
 		item.requestFocus();
+
+		setDisable(false);
 	}
 
 	@FXML
 	private void SignInAction(ActionEvent event) throws Exception {
+		setDisable(true);
 		// 登录信息验证
 		if (tfUserCode.getText().trim().length() <= 0) {
 			alertInfo(tfUserCode, "用户名");
@@ -67,23 +83,27 @@ public class SignInController implements Initializable {
 			// 登录工作日期正常
 			status.setWorkDate(dpWorkDate.getValue());
 		} else {
+			logger.warn("工作日期选择错误");
 			Alert alert = new Alert(Alert.AlertType.INFORMATION, "请选择准确的工作日期");
 			alert.setTitle("日期错误");
 			alert.setHeaderText("请选择工作日期");
 			alert.showAndWait();
 
 			dpWorkDate.requestFocus();
+			setDisable(false);
 			return;
 		}
 		if (cbShift.getSelectionModel().getSelectedItem() != null) {
 			status.setShift(cbShift.getSelectionModel().getSelectedItem());
 		} else {
+			logger.warn("班次选择错误");
 			Alert alert = new Alert(Alert.AlertType.INFORMATION, "请选择班次");
 			alert.setTitle("班次错误");
 			alert.setHeaderText("请选择班次");
 			alert.showAndWait();
 
 			cbShift.requestFocus();
+			setDisable(false);
 			return;
 		}
 
@@ -101,12 +121,14 @@ public class SignInController implements Initializable {
 		// 身份验证失败
 		if (result == null || result.getCode() != 0 || !result.getMsg().equals("")) {
 			String errorMsg = result == null ? "服务器无响应，请联系管理员！" : "错误代码：" + result.getCode() + "\n错误信息:" + result.getMsg();
+			logger.error(errorMsg);
 			Alert alert = new Alert(Alert.AlertType.ERROR, errorMsg);
 			alert.setTitle("登录失败");
 			alert.setHeaderText("登录失败");
 			alert.showAndWait();
 
 			tfUserCode.requestFocus();
+			setDisable(false);
 			return;// 登录失败，返回重新登录
 		}
 
@@ -126,30 +148,33 @@ public class SignInController implements Initializable {
 		}
 
 		if (!getInfo) {// 获取Cookies、用户信息异常，提示重新登录
+			logger.warn("登录成功后获取用户信息异常");
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "用户登录异常，部分功能无法使用。\n是否重新登录？");
 			alert.setTitle("登录异常");
 			alert.setHeaderText("是否重新登录？");
 			Optional<ButtonType> retry = alert.showAndWait();
 
 			if (retry.isPresent() && retry.get() == ButtonType.OK) {
+				setDisable(false);
 				return;
 			}
 		}
-
+		logger.info("登录成功，开始初始化主界面");
 		// 登录成功，初始化主界面并显示
-		Parent root = FXMLLoader.load(getClass().getResource("../main/MainPanel.fxml"));
-		Scene scene = new Scene(root);
+		Parent root = FXMLLoader.load(getClass().getResource("/main/MainPanel.fxml"));
 
+		Scene scene = new Scene(root);
+//		scene.getStylesheets().add("main.css");// 设置css样式文件
 		status.mainPanelStage = new Stage();
 		status.mainPanelStage.setScene(scene);
 		status.mainPanelStage.setTitle("MINI MES");// 设置窗体标题
-		status.mainPanelStage.getIcons().add(new Image(getClass().getResourceAsStream("logo.png")));// 设置窗体图标
+		status.mainPanelStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo.png")));// 设置窗体图标
 		status.mainPanelStage.setResizable(true);//不允许重置大小时全屏会盖住任务栏
 		status.mainPanelStage.centerOnScreen();// 设置到屏幕中心
 		status.mainPanelStage.setMaximized(true);
 		status.mainPanelStage.show();// 显示窗体
-		status.setMainPanelStageCloseEvent();// 阻止关闭动作，防止误操作
 
+		status.setMainPanelStageCloseEvent();// 阻止关闭主界面，防止误操作
 
 //		Screen screen = Screen.getPrimary();
 //		Rectangle2D bounds = screen.getVisualBounds();
@@ -178,7 +203,6 @@ public class SignInController implements Initializable {
 							new Shift(2, "夜班"));
 			cbShift.setItems(shiftList);
 			cbShift.getSelectionModel().selectFirst();// 默认选择第一个班次
-
 
 			tfUserCode.requestFocus();
 
