@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="622.0" prefWidth="1195.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="comm.MiniComm">
+    <children>
+        <BorderPane layoutX="84.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <center>
+                <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="356.0" spacing="10.0">
+                            <children>
+                                <Label text="数据接收：" />
+                                <RadioButton mnemonicParsing="false" text="二进制">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="R" />
+                           </toggleGroup></RadioButton>
+                                <RadioButton mnemonicParsing="false" selected="true" text="十进制" toggleGroup="$R" />
+                                <RadioButton mnemonicParsing="false" text="十六进制" toggleGroup="$R" />
+                                <RadioButton mnemonicParsing="false" text="字符串" toggleGroup="$R" />
+                        <Button mnemonicParsing="false" text="清空" />
+                            </children>
+                        </HBox>
+                        <TextArea editable="false" VBox.vgrow="ALWAYS" />
+                        <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="454.0" spacing="10.0">
+                            <children>
+                                <Label text="数据发送：" />
+                                <RadioButton mnemonicParsing="false" text="二进制">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="T" />
+                           </toggleGroup></RadioButton>
+                                <RadioButton mnemonicParsing="false" text="十进制" toggleGroup="$T" />
+                                <RadioButton mnemonicParsing="false" text="十六进制" toggleGroup="$T" />
+                                <RadioButton mnemonicParsing="false" text="字符串" toggleGroup="$T" />
+                        <Button mnemonicParsing="false" text="清空" />
+                        <Button mnemonicParsing="false" text="发送" />
+                        <ToggleButton fx:id="btnPortControl" mnemonicParsing="false" text="连续发送" />
+                        <TextField prefHeight="20.0" prefWidth="80.0" promptText="请输入连续发送间隔时间" text="0" />
+                            </children>
+                        </HBox>
+                        <TextArea prefHeight="200.0" prefWidth="200.0" />
+                    </children>
+                </VBox>
+            </center>
+            <right>
+                <HBox prefWidth="300.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <VBox spacing="5.0">
+                            <children>
+                                <Separator prefWidth="200.0" />
+                                <Label text="串口设置">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                </Label>
+                                <GridPane hgap="5.0" vgap="5.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="100.0" text="串口" GridPane.rowIndex="1" />
+                                        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="100.0" text="波特率" GridPane.rowIndex="2" />
+                                        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="100.0" text="数据位" GridPane.rowIndex="3" />
+                                        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="100.0" text="校验位" GridPane.rowIndex="4" />
+                                        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="100.0" text="停止位" GridPane.rowIndex="5" />
+                                        <ComboBox fx:id="cbPortList" prefWidth="300.0" promptText="请选择要打开的串口" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <ComboBox fx:id="cbBaudrate" editable="true" prefWidth="300.0" promptText="请选择波特率" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <ComboBox fx:id="cbDatabits" prefWidth="300.0" promptText="请选择数据位" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                        <ComboBox fx:id="cbParity" prefWidth="300.0" promptText="请选择校验位" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                        <ComboBox fx:id="cbStopbits" prefWidth="300.0" promptText="请选择停止位" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    </children>
+                                </GridPane>
+                                <Separator prefWidth="200.0" />
+                        <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="290.0">
+                           <children>
+                              <RadioButton disable="true" mnemonicParsing="false" />
+                                      <ToggleButton fx:id="btnPortControl" mnemonicParsing="false" prefHeight="30.0" prefWidth="300.0" text="打开串口" />
+                           </children>
+                        </HBox>
+                        <Separator prefWidth="200.0" />
+                            </children>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </VBox>
+                    </children>
+                </HBox>
+            </right>
+        </BorderPane>
+    </children>
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+    </padding>
+</AnchorPane>

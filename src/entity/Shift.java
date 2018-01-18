@@ -11,7 +11,7 @@ public class Shift {
 
 	@Override
 	public String toString() {
-		return shiftName.toString();
+		return shiftName;
 	}
 
 	public int getShiftId() {
